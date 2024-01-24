@@ -1,0 +1,8 @@
+../Core/Src/Zmienna_Motor.c:100:6:clark_transf	24	static
+../Core/Src/Zmienna_Motor.c:106:6:park_transf	24	static
+../Core/Src/Zmienna_Motor.c:115:6:angle_theta_calc	16	static
+../Core/Src/Zmienna_Motor.c:133:6:SPWM_modulacja	4	static
+../Core/Src/Zmienna_Motor.c:148:9:Pozycja	32	static
+../Core/Src/Zmienna_Motor.c:177:10:Speed_Inc_Encoder	16	static
+../Core/Src/Zmienna_Motor.c:218:6:SVPWM_modulacja	64	static
+../Core/Src/Zmienna_Motor.c:304:6:PID_REG	24	static

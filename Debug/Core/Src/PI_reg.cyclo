@@ -1,0 +1,11 @@
+../Core/Src/PI_reg.c:28:6:PI_REG	5
+../Core/Src/PI_reg.c:45:6:PI_REG_SER	5
+../Core/Src/PI_reg.c:73:6:state_speed_control_on	1
+../Core/Src/PI_reg.c:78:6:state_currentspeed_control_on	1
+../Core/Src/PI_reg.c:83:6:state_current_control_on	1
+../Core/Src/PI_reg.c:89:6:state_openloop_control	1
+../Core/Src/PI_reg.c:95:6:state_tuning_PI_speed	5
+../Core/Src/PI_reg.c:114:6:state_speed_control_low	1
+../Core/Src/PI_reg.c:120:6:state_speed_control_high	1
+../Core/Src/PI_reg.c:128:6:pi_reg_clc	1
+../Core/Src/PI_reg.c:137:6:motor_state_machine	5

@@ -1,0 +1,9 @@
+../Core/Src/Zmienna_Motor.c:66:6:PI_Regulator	0	static
+../Core/Src/Zmienna_Motor.c:97:6:Generacja_Sinusa	16	static
+../Core/Src/Zmienna_Motor.c:115:6:SPWM_modulacja	0	static
+../Core/Src/Zmienna_Motor.c:143:6:Iqd_current_reg	12	static
+../Core/Src/Zmienna_Motor.c:169:6:Voltage_reg	0	static
+../Core/Src/Zmienna_Motor.c:181:9:Pozycja	12	static
+../Core/Src/Zmienna_Motor.c:210:10:Speed_Inc_Encoder	12	static
+../Core/Src/Zmienna_Motor.c:251:6:SVPWM_modulacja	48	static
+../Core/Src/Zmienna_Motor.c:337:6:PID_REG	16	static
