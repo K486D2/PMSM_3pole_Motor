@@ -75,18 +75,18 @@ volatile uint16_t
 				  REG_MAG,
 				  REG_ANGLEUNC,
 				  REG_ANGLECOM;
-uint16_t licznik2;
+
 volatile uint16_t SPI_bufor_tx[4]={0Xff00,0x0000,0x0000,0000}, SPI_bufor_rx[4]={0};
 
 
 
 uint8_t CAL_status;
 int a,i,b;
-volatile int16_t   pozycja_poprz, pozycja_aktu, pozycja_x, prad_alpha, prad_beta;
-volatile uint16_t d,e,f, wal_offset,pred_dt;
+
+
 volatile uint16_t kierunek, kierunek2 , Mag;
 int32_t calka_pozycja;
-extern uint16_t count;
+
 extern PID_reg POSTION;
 volatile uint8_t tryb_speed_m=1, bufor_tx[8]={0x05,0x11,0xca,0xfa,0xdc,0x44,0x55,0x77};
 volatile uint16_t czas_10ms, czas_100ms, off;

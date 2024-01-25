@@ -73,23 +73,23 @@ void PI_REG_SER(PI_reg *Reg, int16_t fdb_value, int16_t ref_value, int16_t *pi_o
 void state_speed_control_on()
 {
 	PI_regul_on = ON;
-	PI_current_ON = OFF;
+
 }
 void state_currentspeed_control_on()
 {
 	PI_regul_on = ON;
-	PI_current_ON = ON;
+
 }
 void state_current_control_on()
 {
 	PI_regul_on = OFF;
-	PI_current_ON = ON;
+
 }
 
 void state_openloop_control()
 {
 	PI_regul_on = OFF;
-	PI_current_ON = OFF;
+
 
 }
 void state_tuning_PI_speed()
@@ -100,10 +100,10 @@ void state_tuning_PI_speed()
 
 	if(count < 3000)
 	{
-		predkosc_rpm_zad = 1500;
+		rpm_speed_zad = 1500;
 	}
 	if (count > 3000 && count < 6000){
-		predkosc_rpm_zad = 500;
+		rpm_speed_zad = 500;
 	}
 	if(count == 6000){
 		count = 0;

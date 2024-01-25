@@ -27,20 +27,30 @@ const int16_t rotor_offset = -630;
 volatile int32_t 	PI_VD_out,
 					PI_VQ_out,
 					prad_q_zad = 0,
-					prad_d_zad = 0
-					;
+					prad_d_zad = 0;
+
 volatile int16_t    prad_q,
-                    prad_d;
+                    prad_d,
+					prad_alpha,
+					prad_beta;
+
 volatile int32_t    napiecie_Ualpha,
                     napiecie_Ubeta,
 					napiecie_U_U,
 					napiecie_U_V,
 					napiecie_U_W;
 
-volatile int16_t rpm_speed_zad = 20, rpm_speed;
-volatile uint16_t I_a_ADC,
-		          I_b_ADC,
-				  DC_bus_volt_ADC;
+volatile int16_t 	rpm_speed_zad = 20,
+				 	rpm_speed,
+					pozycja_poprz,
+					pozycja_aktu,
+					pozycja_x;
+
+volatile uint16_t   I_a_ADC,
+		            I_b_ADC,
+				    DC_bus_volt_ADC;
+
+
 
 
 int16_t U_SVPWM, V_SVPWM, W_SVPWM;

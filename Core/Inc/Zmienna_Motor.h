@@ -58,51 +58,52 @@
 
 
 
-extern volatile uint8_t sekcja_ster, STAN_MASZYNY,PI_regul_on,licznik_pom, FOC_ON;
-extern volatile uint8_t wektor_ster[1];
-extern volatile uint16_t duty;
-extern volatile char Przycisk_Ster;
-extern volatile uint16_t POMIAR_PRADU[4];
-extern volatile uint16_t LICZNIK_CYKLU, LICZNIK_CYKLU_2;
-extern volatile uint16_t Enkoder_CNT, Czas_Enkoder,Enkoder_rpm, predkosc_rpm_PI;
-
-extern volatile float Enkoder_tmp;
-extern volatile int32_t PI_speed_error, PI_speed_error_sum, PI_out;
-extern volatile int32_t Kp,Ki,PI_out_regul;
-extern volatile uint16_t sekcja_ster_poprz,pozycjonowanie, offset2, Electric_Angle_off,Electric_Angle_2, count2;
-extern volatile int16_t predkosc_rpm_zad,offset_3,predkosc_rpm_poprz;
-extern volatile float predkosc_rpm;
-
-extern volatile uint16_t Ki_pom,Kp_pom,PI_duty,licznik_pom_2;
+extern volatile uint8_t PI_regul_on, FOC_ON;  // if FOC=1-> torq loop, reg speed loop
+extern volatile uint16_t POMIAR_PRADU[4], count;     // pomiar pradu
+extern volatile int32_t Kp,
+				 Ki;        // Kp, Ki speed loop gain
+extern volatile uint16_t pozycja_walu;     // z enkodera absolut
+extern volatile uint16_t pozycja_walu_deg;	// przelicznie na deg
 extern volatile unsigned char ETAP;
-extern volatile uint16_t pozycja_walu;
+extern volatile int16_t obroty_pom;
+extern volatile int32_t pozycja_zad;
+
+extern const int16_t rotor_offset;
+
+//==============================
+
+extern volatile int32_t 	PI_VD_out,
+					        PI_VQ_out,
+					        prad_q_zad,
+					        prad_d_zad;
+
+extern volatile int16_t    prad_q,
+                           prad_d,
+					       prad_alpha,
+					       prad_beta;
+
+extern volatile int32_t    napiecie_Ualpha,
+                    	   napiecie_Ubeta,
+					       napiecie_U_U,
+					       napiecie_U_V,
+					       napiecie_U_W;
+
+extern volatile int16_t 	rpm_speed_zad,
+				 			rpm_speed,
+							pozycja_poprz,
+							pozycja_aktu,
+							pozycja_x;
+
+extern volatile uint16_t   I_a_ADC,
+		                   I_b_ADC,
+				           DC_bus_volt_ADC;
 
 
 
-extern volatile int32_t PI_current_error, PI_current_error_sum, PI_out_current,PI_out_regul_current,Kp_current, Ki_current,PI_current_ON;
 
-
-
-//*Regulator IDQ*//
-extern volatile uint16_t pozycja_walu_deg;
-extern volatile int32_t PI_prad_q_uchyb, PI_prad_d_uchyb,  PI_prad_q_sumuchyb, PI_VD_out, PI_VQ_out,
-prad_q_zad, prad_d_zad;
-extern volatile int32_t PI_prad_d_sumuchyb;
-extern volatile int16_t prad_q, prad_d;
-extern volatile int32_t napiecie_Ualpha, napiecie_Ubeta, napiecie_U_U, napiecie_U_V, napiecie_U_W;
+extern int16_t U_SVPWM, V_SVPWM, W_SVPWM;
 extern volatile uint16_t PWM_U, PWM_V, PWM_W;
-extern volatile float PI_prad_d_KP, PI_prad_d_KI, PI_prad_q_KP, PI_prad_q_KI;
-
-extern volatile int32_t obroty_gl,  pozycja_zad;;
-extern volatile int16_t obroty_pom, rpm_speed_zad, rpm_speed;
-
-extern  int16_t U_SVPWM, V_SVPWM, W_SVPWM;
-
-
 extern uint16_t prad[4], ADC_CAL[4];
-extern volatile uint16_t I_a_ADC,
-		          I_b_ADC,
-				  DC_bus_volt_ADC;
 
 
 typedef struct

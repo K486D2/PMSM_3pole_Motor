@@ -43,7 +43,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern int16_t PRAD_Q_HARV, pozycja_walu_poprz;
+
 extern int32_t calka_pozycja;
 uint8_t faza_test;
 /* USER CODE END PV */
@@ -68,7 +68,7 @@ extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim17;
 extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
-extern uint16_t count, pred_dt, count_pom;
+
 extern volatile int16_t pozycja_poprz, pozycja_aktu, pozycja_x;
 extern volatile uint16_t pozycja_walu,kierunek2, pozycja_start, kierunek,prad_out_avg_sum, tmp_freq, prad_out,count_pom2,prad_out_avg;
 extern volatile int16_t PRAD_POM[];
@@ -279,7 +279,7 @@ void SysTick_Handler(void)
 licznik_10ms++;
 licznik_100ms++;
 if(licznik_10ms==10){czas_10ms=1;licznik_10ms=0;lpf_init(&Lpf, 0, 1.2);
-estimate_rpm = lpf_update(&Lpf, rpm_speed);}
+estimate_rpm = lpf_update(&Lpf, prad_alpha);}
 if(licznik_100ms==100){czas_100ms=1;licznik_100ms=0;}
 
   /* USER CODE END SysTick_IRQn 0 */
