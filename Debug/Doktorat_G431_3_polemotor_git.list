@@ -1368,7 +1368,7 @@ int16_t Pozycja(uint16_t pozycja_ak,uint16_t pozycja_pop, int32_t *poz_calk, uin
  8000f44:	81bb      	strh	r3, [r7, #12]
  8000f46:	4613      	mov	r3, r2
  8000f48:	80fb      	strh	r3, [r7, #6]
-	int16_t  delta_poz, delta_2;
+int16_t  delta_poz, delta_2;
 delta_2=pozycja_pop-pozycja_ak;
  8000f4a:	89ba      	ldrh	r2, [r7, #12]
  8000f4c:	89fb      	ldrh	r3, [r7, #14]
@@ -4565,7 +4565,7 @@ PI_REG(&Id_reg, prad_d, prad_d_zad, (int32_t*)&PI_VD_out);
 
 
 							/**TRANSFORMATA ODWROTNA PARK'a**/
-park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg, (int32_t*)&napiecie_Ualpha, (int32_t*)&napiecie_Ubeta);
+park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg,
  800241a:	4b69      	ldr	r3, [pc, #420]	; (80025c0 <HAL_ADCEx_InjectedConvCpltCallback+0x338>)
  800241c:	6818      	ldr	r0, [r3, #0]
  800241e:	4b65      	ldr	r3, [pc, #404]	; (80025b4 <HAL_ADCEx_InjectedConvCpltCallback+0x32c>)
@@ -4578,6 +4578,7 @@ park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg, (int32_t*)&napiecie_Ualp
  800242c:	9300      	str	r3, [sp, #0]
  800242e:	4b67      	ldr	r3, [pc, #412]	; (80025cc <HAL_ADCEx_InjectedConvCpltCallback+0x344>)
  8002430:	f7fe fcf2 	bl	8000e18 <park_rev_transf>
+		(int32_t*)&napiecie_Ualpha, (int32_t*)&napiecie_Ubeta);
 
 							/**TRANSFORMATA ODWROTNA CLARKA'a**/ //jesli SVPWM to ta transformata nie potrzena
 napiecie_U_U = napiecie_Ualpha;

@@ -166,7 +166,7 @@ void SPWM_modulacja()
 
 int16_t Pozycja(uint16_t pozycja_ak,uint16_t pozycja_pop, int32_t *poz_calk, uint16_t kier)
 {
-	int16_t  delta_poz, delta_2;
+int16_t  delta_poz, delta_2;
 delta_2=pozycja_pop-pozycja_ak;
 	if(abs(pozycja_pop-pozycja_ak)>20)
 	{

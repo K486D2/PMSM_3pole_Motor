@@ -991,7 +991,8 @@ PI_REG(&Id_reg, prad_d, prad_d_zad, (int32_t*)&PI_VD_out);
 
 
 							/**TRANSFORMATA ODWROTNA PARK'a**/
-park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg, (int32_t*)&napiecie_Ualpha, (int32_t*)&napiecie_Ubeta);
+park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg,
+		(int32_t*)&napiecie_Ualpha, (int32_t*)&napiecie_Ubeta);
 
 							/**TRANSFORMATA ODWROTNA CLARKA'a**/ //jesli SVPWM to ta transformata nie potrzena
 napiecie_U_U = napiecie_Ualpha;
