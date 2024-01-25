@@ -1,6 +1,7 @@
 "./Core/Src/PI_reg.o"
 "./Core/Src/Zmienna_Motor.o"
 "./Core/Src/main.o"
+"./Core/Src/pll_sensorless.o"
 "./Core/Src/stm32g4xx_hal_msp.o"
 "./Core/Src/stm32g4xx_it.o"
 "./Core/Src/syscalls.o"

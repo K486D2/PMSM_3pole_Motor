@@ -495,6 +495,21 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x16 ./Core/Src/main.o
  .debug_macro   0x0000000000000000       0x29 ./Core/Src/main.o
  .debug_macro   0x0000000000000000      0x19b ./Core/Src/main.o
+ .group         0x0000000000000000        0xc ./Core/Src/pll_sensorless.o
+ .text          0x0000000000000000        0x0 ./Core/Src/pll_sensorless.o
+ .data          0x0000000000000000        0x0 ./Core/Src/pll_sensorless.o
+ .bss           0x0000000000000000        0x0 ./Core/Src/pll_sensorless.o
+ .debug_info    0x0000000000000000       0x21 ./Core/Src/pll_sensorless.o
+ .debug_abbrev  0x0000000000000000       0x13 ./Core/Src/pll_sensorless.o
+ .debug_aranges
+                0x0000000000000000       0x18 ./Core/Src/pll_sensorless.o
+ .debug_macro   0x0000000000000000       0x11 ./Core/Src/pll_sensorless.o
+ .debug_macro   0x0000000000000000      0xaa8 ./Core/Src/pll_sensorless.o
+ .debug_line    0x0000000000000000       0x3d ./Core/Src/pll_sensorless.o
+ .debug_str     0x0000000000000000     0x2dcf ./Core/Src/pll_sensorless.o
+ .comment       0x0000000000000000       0x44 ./Core/Src/pll_sensorless.o
+ .ARM.attributes
+                0x0000000000000000       0x34 ./Core/Src/pll_sensorless.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32g4xx_hal_msp.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32g4xx_hal_msp.o
  .group         0x0000000000000000        0xc ./Core/Src/stm32g4xx_hal_msp.o
@@ -5076,6 +5091,7 @@ LOAD D:/STM32CubeIDE_1.14.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.extern
 LOAD ./Core/Src/PI_reg.o
 LOAD ./Core/Src/Zmienna_Motor.o
 LOAD ./Core/Src/main.o
+LOAD ./Core/Src/pll_sensorless.o
 LOAD ./Core/Src/stm32g4xx_hal_msp.o
 LOAD ./Core/Src/stm32g4xx_it.o
 LOAD ./Core/Src/syscalls.o
