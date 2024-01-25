@@ -11,6 +11,7 @@
 // Rsh = 0.01 ohms, DC_offset = 1.65 V
 // prad max zmierz --- +/- 28 A
 // obliczenia prad w pliku motor_readme projektu
+// w pliku read też skalowanie wartosci do 1000 jako 100% każdej wielkosci
 
 
 #define PRAD_MAX 						(int16_t)28
@@ -19,6 +20,22 @@
 #define PRAD_MAX_MOTOR_SQR				(int16_t)*((int16_t)*PRAD_MAX_MOTOR(int16_t)*PRAD_MAX_MOTOR)
 #define PRAD_ADC_SCALE					(uint16_t)PRAD_MAX/2048
 #define DC_BUS_ADC_SCALE				10
+
+#define PRAD_MAX_PU 					2048
+#define MOTOR_SPEED_MAX 				3000
+
+
+#define I_OP_SCALE						72
+#define I_RMS							3
+#define I_RMS_PU						I_RMS * I_OP_SCALE
+#define	I_MAX							I_RMS * 1.5
+#define I_MAX_PU						I_MAX * I_OP_SCALE
+#define TORQ_MAX						I_MAX
+
+#define PI_SPEED_TIME					5 // 5ms, 	200 Hz pętla speed bandtwidth
+#define PI_LOW_SPEED_TIME 				10 // 10ms, 100 Hz pętla speed bandtwidth
+#define SPEED_SCALE 					(float)0.72f // dla 5ms
+#define	SPEED_SCALE_LOW					(float)0.36f // dla 10ms
 
 //=======MOTOR PARAMETRY============
 
@@ -37,7 +54,7 @@
 
 #define ENK_ABS_RES				        16384U
 #define ENK_ABS_COUNT_PER_ELEC	        (uint16_t)(ENKODER_RES/MOTOR_POLE_PAIR)
-#define ENK_
+#define ENK_INK_RES						1024U
 
 
 
@@ -100,7 +117,10 @@ typedef struct
 
 }PID_reg;
 
-
+typedef struct {
+	int16_t out;
+	int16_t alp_gain;
+}LowPassFilter;
 
 
 
@@ -108,8 +128,8 @@ typedef struct
 
 void angle_theta_calc();
 void clark_transf(int16_t prad_a, int16_t prad_b, int16_t *alpha, int16_t *beta);
-void park_transf(int16_t alpha, int16_t beta, int16_t rotor_pos, int16_t *q, int16_t *d);
-
+void park_transf(int16_t alpha, int16_t beta, int16_t rotor_pos, volatile int16_t *q, volatile int16_t *d);
+void park_rev_transf(int32_t Vd, int32_t Vq, int16_t rotor_pos,  int32_t *u_alpha,  int32_t *u_beta);
 
 
 void Generacja_Sinusa();
@@ -119,3 +139,6 @@ int16_t Pozycja(uint16_t pozycja_ak,uint16_t pozycja_pop, int32_t *poz_calk, uin
 uint16_t Speed_Inc_Encoder(uint16_t enkoder_cnt, uint16_t enkoder_prev, uint16_t dir);
 void SVPWM_modulacja(int32_t u_alpha, int32_t u_beta, int16_t *U_SVM,int16_t *V_SVM, int16_t *W_SVM);
 void PID_REG(PID_reg *Reg, int32_t act_value,int32_t ref_value, int32_t *iq_out);
+
+void lpf_init(LowPassFilter *fil, int16_t input, float alp);
+int16_t lpf_update(LowPassFilter *fil, int32_t input);

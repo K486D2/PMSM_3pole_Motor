@@ -77,15 +77,13 @@ volatile uint16_t
 				  REG_ANGLECOM;
 uint16_t licznik2;
 volatile uint16_t SPI_bufor_tx[4]={0Xff00,0x0000,0x0000,0000}, SPI_bufor_rx[4]={0};
-volatile uint16_t SPI_bufor_tx1[1]={0x22AA};
-volatile uint8_t SPI_bufor_rx1[1]={};
+
 
 
 uint8_t CAL_status;
 int a,i,b;
 volatile int16_t   pozycja_poprz, pozycja_aktu, pozycja_x, prad_alpha, prad_beta;
 volatile uint16_t d,e,f, wal_offset,pred_dt;
-static float sinus_pozycja_wal[1080], cosinus_pozycja_wal[1080];
 volatile uint16_t kierunek, kierunek2 , Mag;
 int32_t calka_pozycja;
 extern uint16_t count;
@@ -230,6 +228,8 @@ HAL_ADCEx_InjectedStart_IT(&hadc1);
 POSTION.KP=20000;
 POSTION.KI=1U;
 POSTION.KD=220000;
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -982,8 +982,7 @@ angle_theta_calc();
 clark_transf(I_a_ADC, I_b_ADC, &prad_alpha, &prad_beta);
 
 /**TRANS PARK **/
-prad_q = (prad_beta  * cosinus_pozycja_wal[pozycja_walu_deg % 1080] - prad_alpha * sinus_pozycja_wal[pozycja_walu_deg % 1080]);
-prad_d = (prad_alpha * cosinus_pozycja_wal[pozycja_walu_deg % 1080] + prad_beta  * sinus_pozycja_wal[pozycja_walu_deg % 1080]);
+park_transf(prad_alpha, prad_beta, pozycja_walu_deg, &prad_q, &prad_d);
 
 /**TORQ, FLUX REG PI **/
 //Iqd_current_reg();
@@ -992,8 +991,7 @@ PI_REG(&Id_reg, prad_d, prad_d_zad, &PI_VD_out);
 
 
 							/**TRANSFORMATA ODWROTNA PARK'a**/
-napiecie_Ualpha = (PI_VD_out*cosinus_pozycja_wal[pozycja_walu_deg%1080]-PI_VQ_out*sinus_pozycja_wal[pozycja_walu_deg%1080])*1; //0.000002
-napiecie_Ubeta  = (PI_VQ_out*cosinus_pozycja_wal[pozycja_walu_deg%1080]+PI_VD_out*sinus_pozycja_wal[pozycja_walu_deg%1080])*1; // 0.000002
+park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg, &napiecie_Ualpha, &napiecie_Ubeta);
 
 							/**TRANSFORMATA ODWROTNA CLARKA'a**/ //jesli SVPWM to ta transformata nie potrzena
 napiecie_U_U = napiecie_Ualpha;

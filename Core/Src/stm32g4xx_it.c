@@ -74,12 +74,14 @@ extern volatile uint16_t pozycja_walu,kierunek2, pozycja_start, kierunek,prad_ou
 extern volatile int16_t PRAD_POM[];
 
 extern volatile uint16_t czas_10ms, czas_100ms;
-int16_t delta_poz,Pos_reg, testing ;
+int16_t delta_poz,Pos_reg, testing, estimate_rpm;
 
 extern volatile uint8_t tryb_speed_m;
 
 PID_reg POSTION;
 PI_reg speed;
+
+LowPassFilter Lpf;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -253,7 +255,7 @@ void SysTick_Handler(void)
 				pozycja_poprz=pozycja_x;
 				poz_x=pozycja_walu;
 				delta_poz=Pozycja(poz_x,poz_pop, &calka_pozycja, kierunek);
-				if(Pos_reg==1)
+				if(Pos_reg == 1)
 				{
 					PID_REG(&POSTION,calka_pozycja,pozycja_zad, &prad_q_zad);
 				}
@@ -264,18 +266,20 @@ void SysTick_Handler(void)
 
 				if(rpm_speed>6000){rpm_speed=0;}
 				if(rpm_speed<-6000){rpm_speed=0;}
-				if(PI_regul_on==1){
+				if(PI_regul_on == 1){
 
 					PI_REG(&speed, rpm_speed, rpm_speed_zad, &prad_q_zad);
 				}//PI_Regulator();} // DLA <20 RPM KP=500000; KI=200000
 
 			}
+
 			count=0;
 		}
 
 licznik_10ms++;
 licznik_100ms++;
-if(licznik_10ms==10){czas_10ms=1;licznik_10ms=0;}
+if(licznik_10ms==10){czas_10ms=1;licznik_10ms=0;lpf_init(&Lpf, 0, 1.2);
+estimate_rpm = lpf_update(&Lpf, rpm_speed);}
 if(licznik_100ms==100){czas_100ms=1;licznik_100ms=0;}
 
   /* USER CODE END SysTick_IRQn 0 */

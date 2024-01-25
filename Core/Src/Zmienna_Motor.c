@@ -95,24 +95,7 @@ const float cos_tab[200] = {  1.000, 0.998, 0.996, 0.992, 0.988, 0.982, 0.976, 0
 
 
 
-
-
-void clark_transf(int16_t prad_a, int16_t prad_b, int16_t *alpha, int16_t *beta)
-{
-	*alpha = prad_a;
-	*beta  = (prad_a + 2 * prad_b) * 0.577;
-}
-
-void park_transf(int16_t alpha, int16_t beta, int16_t rotor_pos, int16_t *q, int16_t *d)
-{
-	uint16_t idx = 0;
-	idx = (rotor_pos * 1.8) % 200;
-	*q = (beta  * cos_tab[idx] - alpha * sin_tab[idx]);
-	*d = (alpha * cos_tab[idx] + beta  * sin_tab[idx]);
-
-}
-
-/**OBLICZENIA KĄTA THETA**/
+		/**OBLICZENIA KĄTA THETA**/
 void angle_theta_calc()
 {
 int16_t tmp_poz_walu;
@@ -126,6 +109,31 @@ tmp_poz_walu = pozycja_walu + rotor_offset; //0,044 bo dwie pary biegunów
     }
 }
 
+		/**TRANSFORMACJA CLARK**/
+void clark_transf(int16_t prad_a, int16_t prad_b, int16_t *alpha, int16_t *beta)
+{
+	*alpha = prad_a;
+	*beta  = (prad_a + 2 * prad_b) * 0.577;
+}
+
+	/**TRANSFORMACJA PARK**/
+void park_transf(int16_t alpha, int16_t beta, int16_t rotor_pos, volatile int16_t *q, volatile int16_t *d)
+{
+	uint16_t idx = 0;
+	idx = (rotor_pos) % 200;
+	*q = (beta  * cos_tab[idx] - alpha * sin_tab[idx]);
+	*d = (alpha * cos_tab[idx] + beta  * sin_tab[idx]);
+
+}
+
+	/**TRANSFORMATA ODWROTNA PARK'a**/
+void park_rev_transf(int32_t Vd, int32_t Vq, int16_t rotor_pos,  int32_t *u_alpha,   int32_t *u_beta)
+{
+	uint16_t idx = 0;
+	idx = (rotor_pos) % 200;
+	*u_alpha = (Vd * cos_tab[idx] - Vq * sin_tab[idx]) * 1; 	//0.000002 // skalowanie do max +/- 1000 dec
+	*u_beta  = (Vq * cos_tab[idx] + Vd * sin_tab[idx]) * 1; 	// 0.000002
+}
 
 
 
@@ -322,14 +330,23 @@ void PID_REG(PID_reg *Reg, int32_t act_value,int32_t ref_value, int32_t *iq_out)
 	last_error=Reg->PI_error;
 	tmp_out=(Reg->PI_out/100000);
 	*iq_out = tmp_out; // dla PMSM vectro control method
-/*
-	prad_q_zad = (Reg->PI_out/100000);
-	 if(prad_q_zad>500)prad_q_zad=500;
-	 if(prad_q_zad<-500)prad_q_zad=-500;
-	 */
+
 }
 
+//======FIRST ORDER LOW PASS FILTER======
 
+void lpf_init(LowPassFilter *fil, int16_t input, float alp)
+{
+
+	fil->alp_gain = alp;
+}
+
+int16_t lpf_update(LowPassFilter *fil, int32_t input)
+{
+
+    fil->out = fil->out - ( fil->alp_gain * (fil->out - input));
+    return fil->out ;
+}
 
 
 // dokumentacja vector control PMSM by Bartosz D

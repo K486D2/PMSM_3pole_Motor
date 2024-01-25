@@ -2,21 +2,7 @@
 #include "stdio.h"
 #include "stdint.h"
 
-#define PRAD_MAX_PU 	4090
-#define MOTOR_SPEED_MAX 3000
-#define CURRENT_LIMIT 	2100
 
-#define I_OP_SCALE		72
-#define I_RMS			3
-#define I_RMS_PU		I_RMS * I_OP_SCALE
-#define	I_MAX			I_RMS * 1.5
-#define I_MAX_PU		I_MAX * I_OP_SCALE
-#define TORQ_MAX		I_MAX
-
-#define PI_SPEED_TIME	5
-#define PI_LOW_SPEED_TIME 10
-#define SPEED_SCALE 	0.72f
-#define	SPEED_SCALE_LOW	0.36f
 
 typedef struct
 {
