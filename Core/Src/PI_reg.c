@@ -13,7 +13,6 @@
 volatile uint16_t faza_programu = 100;
 volatile uint8_t send_time;
 volatile int16_t tq;
-
 volatile float speed_scale;
 
 
@@ -100,10 +99,10 @@ void state_tuning_PI_speed()
 
 	if(count < 3000)
 	{
-		rpm_speed_zad = 1500;
+		rpm_speed_zad = 100;
 	}
 	if (count > 3000 && count < 6000){
-		rpm_speed_zad = 500;
+		rpm_speed_zad = 300;
 	}
 	if(count == 6000){
 		count = 0;

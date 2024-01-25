@@ -195,38 +195,38 @@ delta_2=pozycja_pop-pozycja_ak;
 }
 uint16_t Speed_Inc_Encoder(uint16_t enkoder_cnt, uint16_t enkoder_prev, uint16_t dir)
 {
-	 static int16_t enc_prev, enc, delta_enc;
-	enc=enkoder_cnt;
-	enc_prev=enkoder_prev;
+	static int16_t enc_prev, enc, delta_enc;
+	enc = enkoder_cnt;
+	enc_prev = enkoder_prev;
 
-	if(dir==0)
+	if(dir == 0)
 	{
-		if(enc>enc_prev&&enc-enc_prev>5)
+		if(enc > enc_prev && enc-enc_prev > 5)
 		{
-			delta_enc=enc-enc_prev;
+			delta_enc = enc - enc_prev;
 		}
-		else if(enc<enc_prev&&(2000-enc_prev)+enc>5)
+		else if(enc < enc_prev && (2000 - enc_prev) + enc > 5)
 		{
-			delta_enc=(2000-enc_prev)+enc;
+			delta_enc=(2000 - enc_prev) + enc;
 		}
-		else if(enc==enc_prev||enc-enc_prev<5)
+		else if(enc == enc_prev || enc-enc_prev < 5)
 		{
-			delta_enc=0;
+			delta_enc = 0;
 		}
 	}
-	 if(dir==16)
+	 if(dir == 16)
 	{
-		if(enc>enc_prev&&(2000-enc)+enc_prev>5)
+		if(enc > enc_prev && (2000 - enc) + enc_prev > 5)
 			{
-			 delta_enc=-((2000-enc)+enc_prev);
+			 delta_enc = -((2000 - enc) + enc_prev);
 			}
-			else if(enc<enc_prev&&enc_prev-enc>5)
+			else if(enc < enc_prev && enc_prev - enc > 5)
 			{
-			delta_enc=-(enc_prev-enc);
+			delta_enc = -(enc_prev - enc);
 			}
-			else if(enc==enc_prev||enc_prev-enc>5)
+			else if(enc == enc_prev || enc_prev - enc > 5)
 			{
-				delta_enc=0;
+				delta_enc = 0;
 			}
 	}
 

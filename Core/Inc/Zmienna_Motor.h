@@ -141,5 +141,8 @@ uint16_t Speed_Inc_Encoder(uint16_t enkoder_cnt, uint16_t enkoder_prev, uint16_t
 void SVPWM_modulacja(int32_t u_alpha, int32_t u_beta, int16_t *U_SVM,int16_t *V_SVM, int16_t *W_SVM);
 void PID_REG(PID_reg *Reg, int32_t act_value,int32_t ref_value, int32_t *iq_out);
 
+uint16_t Speed_Inc_Encoder(uint16_t enkoder_cnt, uint16_t enkoder_prev, uint16_t dir);
+
+
 void lpf_init(LowPassFilter *fil, int16_t input, float alp);
 int16_t lpf_update(LowPassFilter *fil, int32_t input);

@@ -15,4 +15,4 @@
 ../Core/Src/main.c:845:13:MX_USART1_UART_Init	5
 ../Core/Src/main.c:893:13:MX_GPIO_Init	1
 ../Core/Src/main.c:938:6:HAL_ADCEx_InjectedConvCpltCallback	3
-../Core/Src/main.c:1033:6:Error_Handler	1
+../Core/Src/main.c:1029:6:Error_Handler	1

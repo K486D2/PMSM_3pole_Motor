@@ -979,19 +979,19 @@ REG_ANGLECOM=pozycja_walu=SPI_bufor_rx[0]&0X3fff;
 angle_theta_calc();
 
 /**TRANS CLARK **/
-clark_transf(I_a_ADC, I_b_ADC, &prad_alpha, &prad_beta);
+clark_transf(I_a_ADC, I_b_ADC, (int16_t*)&prad_alpha, (int16_t*)&prad_beta);
 
 /**TRANS PARK **/
 park_transf(prad_alpha, prad_beta, pozycja_walu_deg, &prad_q, &prad_d);
 
 /**TORQ, FLUX REG PI **/
 //Iqd_current_reg();
-PI_REG(&Iq_reg, prad_q, prad_q_zad, &PI_VQ_out);
-PI_REG(&Id_reg, prad_d, prad_d_zad, &PI_VD_out);
+PI_REG(&Iq_reg, prad_q, prad_q_zad, (int32_t*)&PI_VQ_out);
+PI_REG(&Id_reg, prad_d, prad_d_zad, (int32_t*)&PI_VD_out);
 
 
 							/**TRANSFORMATA ODWROTNA PARK'a**/
-park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg, &napiecie_Ualpha, &napiecie_Ubeta);
+park_rev_transf(PI_VD_out, PI_VQ_out, pozycja_walu_deg, (int32_t*)&napiecie_Ualpha, (int32_t*)&napiecie_Ubeta);
 
 							/**TRANSFORMATA ODWROTNA CLARKA'a**/ //jesli SVPWM to ta transformata nie potrzena
 napiecie_U_U = napiecie_Ualpha;
@@ -1003,13 +1003,9 @@ napiecie_U_W = ((-napiecie_Ubeta * 1.73) - napiecie_Ualpha) * 0.5;
 SVPWM_modulacja(napiecie_Ualpha, napiecie_Ubeta, &U_SVPWM, &V_SVPWM, &W_SVPWM );
 
 
-PWM_U=(uint16_t)((napiecie_U_U/2)+500);
-PWM_V=(uint16_t)((napiecie_U_V/2)+500);
-PWM_W=(uint16_t)((napiecie_U_W/2)+500);
-
-PWM_U=(uint16_t)((U_SVPWM)+500);
-PWM_V=(uint16_t)((V_SVPWM)+500);
-PWM_W=(uint16_t)((W_SVPWM)+500);
+PWM_U = (uint16_t)((U_SVPWM) + 500); // 500 bo to 0.5PWM offset
+PWM_V = (uint16_t)((V_SVPWM) + 500);
+PWM_W = (uint16_t)((W_SVPWM) + 500);
 
 SPWM_modulacja();
 

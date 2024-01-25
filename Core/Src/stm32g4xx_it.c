@@ -69,9 +69,9 @@ extern TIM_HandleTypeDef htim17;
 extern UART_HandleTypeDef huart1;
 /* USER CODE BEGIN EV */
 
-extern volatile int16_t pozycja_poprz, pozycja_aktu, pozycja_x;
+
 extern volatile uint16_t pozycja_walu,kierunek2, pozycja_start, kierunek,prad_out_avg_sum, tmp_freq, prad_out,count_pom2,prad_out_avg;
-extern volatile int16_t PRAD_POM[];
+
 
 extern volatile uint16_t czas_10ms, czas_100ms;
 int16_t delta_poz,Pos_reg, testing, estimate_rpm;
@@ -80,7 +80,6 @@ extern volatile uint8_t tryb_speed_m;
 
 PID_reg POSTION;
 PI_reg speed;
-
 LowPassFilter Lpf;
 /* USER CODE END EV */
 
@@ -207,15 +206,13 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-	static int16_t start=2000, start_speed, count_10ms, poz_x, poz_pop, poz_pop_cal,licznik_10ms, licznik_100ms;
+	static int16_t start=2000, start_speed, count_10ms,
+			poz_x, poz_pop, poz_pop_cal,licznik_10ms, licznik_100ms;
 	uint8_t loop_time;
 
 	start_speed++;
-
 	count++;
 	count_10ms++;
-
-
 
 
 		if(count == PI_SPEED_TIME)
