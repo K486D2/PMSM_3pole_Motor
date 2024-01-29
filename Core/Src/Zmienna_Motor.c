@@ -126,11 +126,11 @@ void clark_transf(int16_t prad_a, int16_t prad_b, int16_t *alpha, int16_t *beta)
 	*beta  = (prad_a + 2 * prad_b) * 0.577;
 }
 
-	/**TRANSFORMACJA PARK**/
+	/**TRANSFORMACJA PARK (może przeniseść idx aby dwa razy nie robić modulo sprawdzoc na oscylo)**/
 void park_transf(int16_t alpha, int16_t beta, int16_t rotor_pos, volatile int16_t *q, volatile int16_t *d)
 {
 	uint16_t idx = 0;
-	idx = (rotor_pos) % 200;
+	idx = (rotor_pos) % 200; // idx = rotor_pos & 0xFF
 	*q = (beta  * cos_tab[idx] - alpha * sin_tab[idx]);
 	*d = (alpha * cos_tab[idx] + beta  * sin_tab[idx]);
 
