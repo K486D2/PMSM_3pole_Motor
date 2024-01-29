@@ -1,0 +1,2 @@
+../Core/Src/pll_sensorless.c:20:6:pll_theta_estimator	5
+../Core/Src/pll_sensorless.c:74:6:pll_sensorless_estimator	1

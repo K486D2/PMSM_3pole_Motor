@@ -354,7 +354,7 @@ void lpf_init(LowPassFilter *fil, int16_t input, float alp)
 int16_t lpf_update(LowPassFilter *fil, int32_t input)
 {
 
-    fil->out = fil->out - ( fil->alp_gain * (fil->out - input));
+    fil->out = fil->out + (input - fil->out) * fil->alp_gain;
     return fil->out ;
 }
 

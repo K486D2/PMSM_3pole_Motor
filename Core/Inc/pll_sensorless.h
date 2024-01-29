@@ -8,6 +8,11 @@
 #ifndef INC_PLL_SENSORLESS_H_
 #define INC_PLL_SENSORLESS_H_
 
+
+#define PLL_PI						(float)3.14
+#define	PLL_ANGLE_2P                (float)6.28
+#define PLL_ANGLE_STEP				(float)PLL_ANGLE_2P/200 // 200 to rozmiar tablicy sin,cos
+
 typedef struct
 {
 	int32_t qdeltaT;			// interwał integratora
@@ -41,7 +46,19 @@ typedef struct
 	int32_t qNominal_Speed;		// predkość nominalna silnika rad/sec
 	int32_t qDecim_Nom_speed;	// predkosć dec/10
 
-}pll_estymator;
+}pll_estymator_t;
 
+typedef struct
+{
+	int32_t alpha;
+	int32_t beta;
+}pll_bemf_alp_bet_t;
+
+typedef struct {
+
+	float Angle;
+	float sinus;
+	float cosinus;
+}pll_theta_t;
 
 #endif /* INC_PLL_SENSORLESS_H_ */
